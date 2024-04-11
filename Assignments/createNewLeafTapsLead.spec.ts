@@ -43,17 +43,17 @@ test("Create New Lead", async ({ page }) => {
 
     // STEP 6: Verify the company name, first name, last name and the status
 
-    expect(page.locator("#viewLead_companyName_sp")).toContainText(COMPANY_NAME)
+    await expect(page.locator("#viewLead_companyName_sp")).toContainText(COMPANY_NAME)
     expect(await page.locator("#viewLead_companyName_sp").textContent()).toContain(COMPANY_NAME)
 
-    expect(page.locator("#viewLead_firstName_sp")).toContainText(FIRST_NAME)
+    await expect(page.locator("#viewLead_firstName_sp")).toContainText(FIRST_NAME)
     expect(await page.locator("#viewLead_firstName_sp").textContent()).toContain(FIRST_NAME)
 
-    expect(page.locator("#viewLead_lastName_sp")).toContainText(LAST_NAME)
+    await expect(page.locator("#viewLead_lastName_sp")).toContainText(LAST_NAME)
     expect(await page.locator("#viewLead_lastName_sp").textContent()).toContain(LAST_NAME)
 
     expect(page.locator("#viewLead_statusId_sp")).not.toBeNull()
-    expect(page.locator("#viewLead_statusId_sp")).toHaveText('Assigned')
+    await expect(page.locator("#viewLead_statusId_sp")).toHaveText('Assigned')
 
     // DISPLAY THE LEAD NUMBER 
     const compNameLead= await page.locator('#viewLead_companyName_sp').textContent()
