@@ -6,7 +6,7 @@ test("Edit Lead", async ({ page }) => {
     const APP_URL = 'http://leaftaps.com/opentaps/control/main'
     const COMPANY_NAME = 'EDITCOMPANYNAME'
     const FIRST_NAME = 'FIRSTNAME'
-    const ANNUAL_REVENUE = '200,000.00'
+    const ANNUAL_REVENUE = '200000'
     const DEPARTMENT = 'EDITDEPARTMENTNAME'
 
     // STEP 1: Navigate to the URL
@@ -63,6 +63,11 @@ test("Edit Lead", async ({ page }) => {
     await expect(page.locator("#viewLead_departmentName_sp")).toContainText(DEPARTMENT)
     expect(await page.locator("#viewLead_departmentName_sp").textContent()).toContain(DEPARTMENT)
 
-    await expect(page.locator("#viewLead_annualRevenue_sp")).toContainText(ANNUAL_REVENUE)
+    // Eliminating the Special Symbols from the returned String and converting it to Integer and Pass it to assertion .toBe() method
+    let annualRevInStr = await page.locator("#viewLead_annualRevenue_sp").textContent()
+    let annualRevInStrNew
+    annualRevInStrNew = annualRevInStr?.replace(/[$,]/g,'')
+    let annualRevInt = parseInt(annualRevInStrNew)    
+    expect(annualRevInt).toBe(parseInt(ANNUAL_REVENUE))
 
 })
